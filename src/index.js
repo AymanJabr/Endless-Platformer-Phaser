@@ -3,7 +3,10 @@ import bomb from './assets/bomb.png';
 import dude from './assets/dude.png';
 import platform from './assets/platform.png';
 import sky from './assets/sky.png';
-import star from './assets/star.png';
+import star from './assets/coin.png';
+import coinSound from './assets/coin.mp3'
+import jumpSound from './assets/jump.mp3'
+import loseSound from './assets/lose.mp3'
 
 
 var player;
@@ -14,6 +17,9 @@ var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
+var collectCoin
+var jumpingSound
+var losingSound
 
 function preload() {
     this.load.image('sky', sky);
@@ -21,11 +27,17 @@ function preload() {
     this.load.image('star', star);
     this.load.image('bomb', bomb);
     this.load.spritesheet('dude', dude, { frameWidth: 32, frameHeight: 48 });
+    this.load.audio('coinSound',[coinSound])
+    this.load.audio('jumpSound',[jumpSound] )
+    this.load.audio('loseSound',[loseSound])
 }
 
 function create() {
     //  A simple background for our game
     this.add.image(400, 300, 'sky');
+    collectCoin = this.sound.add("coinSound", { loop: false })
+    jumpingSound = this.sound.add('jumpSound', { loop: false })
+    losingSound = this.sound.add('loseSound', { loop: false })
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
@@ -102,6 +114,11 @@ function create() {
 
 function update() {
     if (gameOver) {
+        losingSound.play()
+        gameOver = false
+        this.registry.destroy(); // destroy registry
+        this.events.off();﻿ // disable all active events
+        this.scene.restart();﻿﻿﻿﻿ // restart current scene
         return;
     }
 
@@ -115,6 +132,10 @@ function update() {
 
         player.anims.play('right', true);
     }
+    else if (cursors.down.isDown) {
+        player.setVelocityY(250)
+    }
+
     else {
         player.setVelocityX(0);
 
@@ -123,13 +144,18 @@ function update() {
 
     if (cursors.up.isDown && player.body.touching.down) {
         player.setVelocityY(-330);
+        jumpingSound.play()
+        
     }
 }
 
 function collectStar(player, star) {
     star.disableBody(true, true);
 
+    
+
     //  Add and update the score
+    collectCoin.play()
     score += 10;
     scoreText.setText('Score: ' + score);
 
