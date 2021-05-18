@@ -4,7 +4,7 @@ In this project, I created a very simple platformer game using Phaser3, a Javasc
 
 ## Instructions
 
-You can play the game right now (by clicking here)[https:google.com]
+You can play the game right now [by clicking here](https://simple-platform-jumper.netlify.app/)
 
 Use the arrow keys to move around in the game, collect as many stars as possible while avoiding the bombs.
 
