@@ -1,6 +1,12 @@
 import Phaser from 'phaser';
 import bomb from './assets/bomb.png';
+
 import dude from './assets/dude.png';
+import character from './assets/character.png'
+// import characterLeft from './assets/character-left-walk.png'
+// import characterRight from './assets/character-right-walk.png'
+// import characterIdle from './assets/character-still.png'
+
 import platform from './assets/platform.png';
 import sky from './assets/sky.png';
 import star from './assets/coin.png';
@@ -26,7 +32,13 @@ function preload() {
     this.load.image('ground', platform);
     this.load.image('star', star);
     this.load.image('bomb', bomb);
+
     this.load.spritesheet('dude', dude, { frameWidth: 32, frameHeight: 48 });
+    this.load.spritesheet('character', character, { frameWidth: 43, frameHeight: 47 })
+    // this.load.spritesheet('character-left', characterLeft, { frameWidth: 43, frameHeight: 47 })
+    // this.load.spritesheet('character-right', characterRight, { frameWidth: 43, frameHeight: 47 })
+    // this.load.spritesheet('character-idle', characterIdle)
+
     this.load.audio('coinSound',[coinSound])
     this.load.audio('jumpSound',[jumpSound] )
     this.load.audio('loseSound',[loseSound])
@@ -52,7 +64,8 @@ function create() {
     platforms.create(750, 220, 'ground');
 
     // The player and its settings
-    player = this.physics.add.sprite(100, 450, 'dude');
+    // player = this.physics.add.sprite(100, 450, 'dude');
+    player = this.physics.add.sprite(100,450, 'character')
 
     //  Player physics properties. Give the little guy a slight bounce.
     player.setBounce(0.2);
@@ -61,21 +74,21 @@ function create() {
     //  Our player animations, turning, walking left and walking right.
     this.anims.create({
         key: 'left',
-        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 10,
+        frames: this.anims.generateFrameNumbers('character', { start: 4, end: 6 }),
+        frameRate: 14,
         repeat: -1
     });
 
     this.anims.create({
         key: 'turn',
-        frames: [{ key: 'dude', frame: 4 }],
+        frames: [{ key: 'character', frame: 0 }],
         frameRate: 20
     });
 
     this.anims.create({
         key: 'right',
-        frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-        frameRate: 10,
+        frames: this.anims.generateFrameNumbers('character', { start: 1, end: 3 }),
+        frameRate: 14,
         repeat: -1
     });
 
