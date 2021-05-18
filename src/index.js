@@ -200,8 +200,7 @@ function hitBomb(player, bomb) {
 
     player.anims.play('turn');
 
-    const aPromise = addScoreAndSend(score)
-    aPromise.then( data => console.log(data.result))
+    addScoreAndSend(score).then( data => console.log(data.result))
 
     gameOver = true;
 }

@@ -11,3 +11,11 @@ test('Check that new Score is successfully saved', () => {
     })
     
 });
+
+test('Check that the score list is correctly returned', () => {
+    myValue = ''
+    showScoreList().then(data => {
+        expect(data.result[0].user).toBe("Another one");
+    })
+
+});

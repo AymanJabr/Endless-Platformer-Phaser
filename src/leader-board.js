@@ -4,7 +4,7 @@ const showScoreList = () => {
     return fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/efrnqEJRF6YCD6jcqp0F/scores/')
         .then(response => response.json())
         .then((data) => {
-            console.log(data.result)
+            // console.log(data.result)
             return data.result
         })
         .catch(err => {
@@ -34,7 +34,6 @@ const addScoreAndSend = (myScore) => {
         .catch(err => {
             console.error(err)
         })
-    // showScoreList()
 
 }
 
