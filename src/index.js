@@ -219,4 +219,38 @@ const config = {
     }
 };
 
+const showScoreList = () => {
+    allScores = fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/efrnqEJRF6YCD6jcqp0F/scores/')
+        .then(response => response.json())
+        .then(data => data.result)
+        .catch(err => {
+            console.error(err)
+        })
+    
+    return allScores
+}
+
+const addScoreAndSend = () => {
+
+    fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/efrnqEJRF6YCD6jcqp0F/scores/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "user": "Another one",
+            "score": score
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+
+}
+
 const game = new Phaser.Game(config);
