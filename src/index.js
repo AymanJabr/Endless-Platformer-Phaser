@@ -1,11 +1,7 @@
 import Phaser from 'phaser';
 import bomb from './assets/bomb.png';
 
-import dude from './assets/dude.png';
 import character from './assets/character.png';
-// import characterLeft from './assets/character-left-walk.png'
-// import characterRight from './assets/character-right-walk.png'
-// import characterIdle from './assets/character-still.png'
 
 import platform from './assets/platform.png';
 import sky from './assets/sky.png';
@@ -34,11 +30,7 @@ function preload() {
   this.load.image('star', star);
   this.load.image('bomb', bomb);
 
-  this.load.spritesheet('dude', dude, { frameWidth: 32, frameHeight: 48 });
   this.load.spritesheet('character', character, { frameWidth: 43, frameHeight: 47 });
-  // this.load.spritesheet('character-left', characterLeft, { frameWidth: 43, frameHeight: 47 })
-  // this.load.spritesheet('character-right', characterRight, { frameWidth: 43, frameHeight: 47 })
-  // this.load.spritesheet('character-idle', characterIdle)
 
   this.load.audio('coinSound', [coinSound]);
   this.load.audio('jumpSound', [jumpSound]);
@@ -48,13 +40,11 @@ function preload() {
 function collectStar(player, star) {
   star.disableBody(true, true);
 
-  //  Add and update the score
   collectCoin.play();
   score += 10;
   scoreText.setText(`Score: ${score}`);
 
   if (stars.countActive(true) === 0) {
-    //  A new batch of stars to collect
     stars.children.iterate((child) => {
       child.enableBody(true, child.x, 0, true, true);
     });
@@ -82,33 +72,24 @@ function hitBomb(player) {
 }
 
 function create() {
-  //  A simple background for our game
   this.add.image(400, 300, 'sky');
   collectCoin = this.sound.add('coinSound', { loop: false });
   jumpingSound = this.sound.add('jumpSound', { loop: false });
   losingSound = this.sound.add('loseSound', { loop: false });
 
-  //  The platforms group contains the ground and the 2 ledges we can jump on
   platforms = this.physics.add.staticGroup();
 
-  //  Here we create the ground.
-  //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
   platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-  //  Now let's create some ledges
   platforms.create(600, 400, 'ground');
   platforms.create(50, 250, 'ground');
   platforms.create(750, 220, 'ground');
 
-  // The player and its settings
-  // player = this.physics.add.sprite(100, 450, 'dude');
   player = this.physics.add.sprite(100, 450, 'character');
 
-  //  Player physics properties. Give the little guy a slight bounce.
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
-  //  Our player animations, turning, walking left and walking right.
   this.anims.create({
     key: 'left',
     frames: this.anims.generateFrameNumbers('character', { start: 4, end: 6 }),
@@ -129,10 +110,8 @@ function create() {
     repeat: -1,
   });
 
-  //  Input Events
   cursors = this.input.keyboard.createCursorKeys();
 
-  //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
   stars = this.physics.add.group({
     key: 'star',
     repeat: 11,
@@ -140,16 +119,13 @@ function create() {
   });
 
   stars.children.iterate((child) => {
-    //  Give each star a slightly different bounce
     child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
   });
 
   bombs = this.physics.add.group();
 
-  //  The score
   scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 
-  //  Collide the player and the stars with the platforms
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(stars, platforms);
   this.physics.add.collider(bombs, platforms);
