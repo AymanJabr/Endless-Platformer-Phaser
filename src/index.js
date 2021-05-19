@@ -1,9 +1,8 @@
 import Phaser from 'phaser';
 
-import LeaderBoardScene from './LeaderBoardScene'
+import LeaderBoardScene from './LeaderBoardScene';
 
 import MainGameScene from './MainGameScene';
-
 
 const config = {
   type: Phaser.AUTO,
@@ -16,7 +15,7 @@ const config = {
   },
   width: 800,
   height: 600,
-  scene: [MainGameScene,LeaderBoardScene]
+  scene: [MainGameScene, LeaderBoardScene],
 };
 
 class Game extends Phaser.Game {
