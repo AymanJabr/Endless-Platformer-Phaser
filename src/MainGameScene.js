@@ -1,9 +1,12 @@
 import 'phaser'
 import bomb from './assets/bomb.png';
 
+
 import character from './assets/character.png';
 
-import { addScoreAndSend } from './leader-board';
+import { addScoreAndSend, showScoreList } from './leader-board';
+
+
 
 import platform from './assets/platform.png';
 import sky from './assets/sky.png';
@@ -23,6 +26,8 @@ let scoreText;
 let collectCoin;
 let jumpingSound;
 let losingSound;
+
+
 
 export default class MainGameScene extends Phaser.Scene {
     constructor() {
@@ -112,13 +117,12 @@ export default class MainGameScene extends Phaser.Scene {
         if (gameOver) {
             losingSound.play();
             gameOver = false;
-            score = 0
-            // this.registry.destroy();
-            // this.events.off();
 
-            // this.scene.add('LeaderBoard', LeaderBoardScene)
-            this.scene.start('leaderboardScene')
-            // this.scene.restart();
+            showScoreList().then(data => {
+
+                this.scene.start('leaderboardScene', { score: score, data: data })
+            })
+            
             return;
         }
 
@@ -179,3 +183,4 @@ export default class MainGameScene extends Phaser.Scene {
     }
 
 }
+
