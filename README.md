@@ -31,6 +31,21 @@ To get a local copy up and running follow these steps.
 
 Run `npm jest` to run the tests.
 
+## Game Design Document
+- The assets used in the game can be found in the `src/assets` directory, and they include images and sound effects used for the game, these are: 
+1. Bomb image => `bomb.png`
+2. Character images sprite sheet, which contains all the required images to make the character's animations => `character.png`
+3. Coin image => `coin.png`
+4. Platform image => `platform.png`
+5. Sky image => `sky.png`
+6. Coin collection sound effect => `coin.mp3`
+7. Jump Sound effect => `jump.mp3`
+8. Game End Sound effect => `lose.mp3`
+
+- The level design in this game is very simple but it is based on a tested concept. The platforms can be divided into 3 categories according to their elevation, the ground, middle platform, and higher platforms. The player can go from the lower to the higher platforms only using the middle one. The higher platforms and the middle one are where the coins will be spawned, which gives an incentive for the player to go to these platforms, however these platforms are also where the bombs are most likely to be.
+
+- The game has a natural progression in difficulty, like all arcade games, it starts off as impossible to lose, where the player has just to collect the different coins, this makes sure that the player has a good understanding of how the mechanics work before sending in the first bomb. The higher the amount of coins that the player catches, the higher the amount of bombs and thus the difficulty of the game will become. The bombs are set to have a random velocity and direction, but they are always set to spawn in the  opposite side to where the player is currently standing, which makes the game challenging but fair.
+
 
 ## AUTHOR
 

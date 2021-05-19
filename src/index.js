@@ -139,6 +139,7 @@ function update() {
   if (gameOver) {
     losingSound.play();
     gameOver = false;
+    score = 0
     this.registry.destroy();
     this.events.off();
     this.scene.restart();
