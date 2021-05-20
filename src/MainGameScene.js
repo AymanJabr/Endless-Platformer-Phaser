@@ -27,12 +27,12 @@ let losingSound;
 export default class MainGameScene extends Phaser.Scene {
   constructor() {
     super('mainGameScene');
-    console.log('entered in constructor');
     this.name = ''
   }
 
   init(data) {
     this.name = data.name
+    score = 0
   }
 
   preload() {
@@ -118,7 +118,8 @@ export default class MainGameScene extends Phaser.Scene {
       gameOver = false;
 
       showScoreList().then((data) => {
-        this.scene.start('leaderboardScene', { score, data });
+        let name = this.name
+        this.scene.start('leaderboardScene', { score, data, name });
       });
 
       return;
@@ -175,7 +176,7 @@ export default class MainGameScene extends Phaser.Scene {
 
     player.anims.play('turn');
 
-    addScoreAndSend(score).then((data) => console.log(data.result));
+    addScoreAndSend(score, this.name).then((data) => console.log(data.result));
 
     gameOver = true;
   }

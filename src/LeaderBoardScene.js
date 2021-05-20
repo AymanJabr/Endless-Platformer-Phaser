@@ -6,11 +6,13 @@ export default class LeaderBoardScene extends Phaser.Scene {
     console.log('entered in constructor');
     this.score = 0;
     this.data = '';
+    this.name = ''
   }
 
   init(data) {
     this.score = data.score;
-    this.data = data.data.join(', ');
+    this.data = data.data.join(' ');
+    this.name = data.name
   }
 
 
@@ -23,7 +25,8 @@ export default class LeaderBoardScene extends Phaser.Scene {
     this.centerButtonText(this.gameText, this.gameButton);
 
     this.gameButton.on('pointerdown', () => {
-      this.scene.start('mainGameScene');
+      let name = this.name
+      this.scene.start('mainGameScene', {name});
     });
 
     this.input.on('pointerover', (event, gameObjects) => {
@@ -34,11 +37,11 @@ export default class LeaderBoardScene extends Phaser.Scene {
       gameObjects[0].setTexture('blueButton1');
     });
 
-    this.creditsText = this.add.text(0, 0, `Your Score: ${this.score}`, { fontSize: '32px', fill: '#fff' });
+    this.creditsText = this.add.text(0, 0, `${this.name}'s Score: ${this.score}`, { fontSize: '32px', fill: '#fff' });
 
     this.madeByText = this.add.text(0, 0, `Top 5 High Scores: ${this.data}`, { fontSize: '26px', fill: '#fff' });
 
-    this.zone = this.add.zone(800 / 2, 600 / 2, 800, 600);
+    this.zone = this.add.zone(800 / 2, 600 / 2, 800, 1600);
 
     Phaser.Display.Align.In.Center(
       this.creditsText,
