@@ -28,6 +28,11 @@ export default class MainGameScene extends Phaser.Scene {
   constructor() {
     super('mainGameScene');
     console.log('entered in constructor');
+    this.name = ''
+  }
+
+  init(data) {
+    this.name = data.name
   }
 
   preload() {

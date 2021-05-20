@@ -23,6 +23,10 @@ module.exports = {
         test: /\.(gif|png|jpe?g|svg|xml|mp3)$/i,
         use: 'file-loader',
       },
+      // {
+      //   test: /\.html$/i,
+      //   loader: 'html-loader',
+      // }
     ],
   },
   plugins: [
@@ -36,5 +40,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './index.html',
     }),
+    
   ],
 };
