@@ -1,4 +1,6 @@
 import 'phaser';
+import platformImage from './assets/platform.png';
+
 /* eslint-disable */
 export default class LeaderBoardScene extends Phaser.Scene {
   constructor() {
@@ -7,6 +9,10 @@ export default class LeaderBoardScene extends Phaser.Scene {
     this.score = 0;
     this.data = '';
     this.name = ''
+  }
+
+  preload(){
+        this.load.image('platformImage', platformImage);
   }
 
   init(data) {
@@ -18,7 +24,7 @@ export default class LeaderBoardScene extends Phaser.Scene {
 
   create() {
     // Game
-    this.gameButton = this.add.sprite(400, 600, 'blueButton1').setInteractive();
+    this.gameButton = this.add.sprite(400, 600, 'platformImage').setInteractive();
     this.centerButton(this.gameButton, 1);
 
     this.gameText = this.add.text(0, 0, 'Play Again', { fontSize: '32px', fill: '#fff' });
@@ -30,11 +36,11 @@ export default class LeaderBoardScene extends Phaser.Scene {
     });
 
     this.input.on('pointerover', (event, gameObjects) => {
-      gameObjects[0].setTexture('blueButton2');
+      gameObjects[0].setTexture('platformImage');
     });
 
     this.input.on('pointerout', (event, gameObjects) => {
-      gameObjects[0].setTexture('blueButton1');
+      gameObjects[0].setTexture('platformImage');
     });
 
     this.creditsText = this.add.text(0, 0, `${this.name}'s Score: ${this.score}`, { fontSize: '32px', fill: '#fff' });

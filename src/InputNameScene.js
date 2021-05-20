@@ -1,5 +1,5 @@
 import 'phaser';
-import platformImage from './assets/platform.png'
+import platformImage from './assets/platform.png';
 // import myForm from './form.html'
 /* eslint-disable */
 export default class InputNameScene extends Phaser.Scene {

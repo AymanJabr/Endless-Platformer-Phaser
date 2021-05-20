@@ -1,16 +1,11 @@
 import Phaser from 'phaser';
-import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin'
-
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 
 import InputNameScene from './InputNameScene';
 
 import LeaderBoardScene from './LeaderBoardScene';
 
 import MainGameScene from './MainGameScene';
-
-
-
-
 
 const config = {
   type: Phaser.AUTO,
@@ -22,7 +17,7 @@ const config = {
     },
   },
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   parent: 'phaser-container',
   plugins: {
@@ -30,13 +25,13 @@ const config = {
       {
         key: 'rexUI',
         plugin: RexUIPlugin,
-        mapping: 'rexUI'
-      }
-    ]
+        mapping: 'rexUI',
+      },
+    ],
   },
   width: 800,
   height: 600,
-  scene: [InputNameScene ,MainGameScene, LeaderBoardScene],
+  scene: [InputNameScene, MainGameScene, LeaderBoardScene],
 };
 
 class Game extends Phaser.Game {

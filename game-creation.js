@@ -2,7 +2,6 @@ const fetch = require('node-fetch');
 
 // 'Game with ID: FtTbSPgjuEfSKeMCYm4O  added.'
 
-
 async function createGame() {
   const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
     method: 'POST',
@@ -15,7 +14,7 @@ async function createGame() {
     }),
   });
   const data = await response.json();
-  console.log(data)
+  console.log(data);
 }
 
 createGame();
